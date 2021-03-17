@@ -66,10 +66,24 @@
             </form>
             <?php 
                 if(isset($_POST["ajouter"])){
+                    //checking if the code already exists
                     $conn = mysqli_connect('localhost','root','','hotel');
+                    $exist=false;
+                    $query1  = "select * from chambre";
+                    $data = mysqli_query($conn,$query1);
+                    if (mysqli_num_rows($data) > 0){
+                    while($row = mysqli_fetch_assoc($data)) {
+                    if($row["code_ch"] == $_POST["code"]){$exist = true;}
+                    }
+                    }
+                    //end of checking
+                    if($exist){
+                        echo "<script>alert('code already exists!')</script>";
+                    } else {
                     $query  = "insert into chambre values(".$_POST["code"].",".$_POST["lits"].",".$_POST["prix"].")";
                     mysqli_query($conn, $query);
                     header("location:hotel.php");
+                    }
                 }
             ?>
         </div>
@@ -104,8 +118,8 @@
             </table>
             <form action="" method="post">
                 <p>Enter the code of chamber you wanna delete:</p>
-                <input type="number" name="codeDelete" required>
-                <button name="ok" type="submit">Supprimer</button>
+                <input type="number" name="codeDelete" min="0" required>
+                <button name="ok">Supprimer</button>
             </form>
             <?php
                 if(isset($_POST["ok"])){
