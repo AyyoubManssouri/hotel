@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <script src="hotel.js"></script>
@@ -161,20 +161,20 @@
             <div class="close-btn" onclick="button4()">&times;</div>
             <h1>Modify the price:</h1>
             <form action="" method="post">
-                <p>enter the code of the chamber you'd like to modify:</p>
-                <select name="codeCh">
+                <p>Entrez le code de la chambre que vous souhaitez modifier:</p>
+                <select name="codeCh" id="codes">
                 <?php 
                     $conn = mysqli_connect('localhost','root','','hotel');
                     $query  = "select * from chambre";
                     $data = mysqli_query($conn,$query);
                     if (mysqli_num_rows($data) > 0){
                     while($row = mysqli_fetch_assoc($data)) {
-                        echo "<option value=".$row["code_ch"].">".$row["code_ch"]."</option>";
+                        echo "<option value='".$row["code_ch"]."''>".$row["code_ch"]."</option>";
                         }
                     }
-                    ?>
+                ?>
                 </select>
-                <p>set the new price:</p>
+                <p>Le nouveau prix:</p>
                 <input type="number" name="newPrice" min="0" required>
                 <button name="update">Update</button>
             </form>
