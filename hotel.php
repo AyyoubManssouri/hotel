@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="form">
-        <div><h1>La gestion des chambres</h1></div>
+        <div><h1>La gestion des chambres !</h1></div>
 
         <!-- first button -->
 
